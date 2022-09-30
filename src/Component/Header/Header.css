@@ -1,0 +1,20 @@
+.header-container{
+    text-align: center;
+}
+nav{
+    background-color: black;
+    line-height: 30px;
+}
+nav a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    margin-left: 30px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    border-radius: 7px;
+}
+nav a:hover{
+    background-color: aquamarine;
+    color: black;
+}

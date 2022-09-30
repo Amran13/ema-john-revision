@@ -1,0 +1,24 @@
+.product-container div{
+    width: 30%;
+}
+.product-container div>img{
+    width: 90%;
+}
+
+.product-container{
+    display: flex;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+}
+
+.details button{
+    padding: 8px 25px;
+    background-color: aquamarine;
+    border-radius: 7px;
+    border: 1px solid gray;
+}
+
+
+
+
