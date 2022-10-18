@@ -7,7 +7,7 @@ const Cart = (props) => {
         total = total + product.price;
     }
     return (
-        <div>
+        <div className='cart'>
             <h2>Order Summery</h2>
                 <h3>Order : {props.cart.length} </h3>
                 <h4>Price : ${total}</h4>
