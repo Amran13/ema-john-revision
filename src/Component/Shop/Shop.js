@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addToDb, removeDb } from '../../ema-john-resources/utilities/fakedb';
+import { addToDb, getStored, removeDb } from '../../ema-john-resources/utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
@@ -13,15 +13,39 @@ const Shop = () => {
         .then(data => setProducts(data))
     },[])
 
-    const handleAddToCart = (product) => {
-        const newCart = [...cart, product];
+    useEffect(()=> {
+        const shoppingCart = getStored();
+        // console.log(shoppingCart)
+        const savedCart = [];
+        for(const id in shoppingCart){
+            const addedProduct = products.find(product => product.id === id);
+            if(addedProduct){
+                const newQuantiy = shoppingCart[id];
+                addedProduct.quantity = newQuantiy;
+                // console.log('added product',addedProduct);
+                savedCart.push(addedProduct);
+            }
+        }
+        setCart(savedCart);
+    },[products])
+
+    const handleAddToCart = (selectedProduct) => {
+        const exist = cart.find(product => product.id === selectedProduct.id);
+        let newCart = [];
+        if(!exist){
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct];
+        }
+        else{
+            const rest = cart.filter(product => product.id !== selectedProduct.id);
+            exist.quantity = exist.quantity + 1;
+            newCart = [...rest, exist]
+        }
         setCart(newCart);
-        addToDb(product.id);
+        addToDb(selectedProduct.id);
         
     }
     const handleRemoveToCart = (product) => {
-        // const newCart = [...cart , product];
-        // setCart(newCart);
         removeDb(product.id)
     }
     return (
